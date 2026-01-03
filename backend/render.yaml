@@ -1,0 +1,28 @@
+services:
+  # Node.js Backend
+  - type: web
+    name: intervueai-node-backend
+    env: node
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 5000
+      - key: MONGODB_URI
+        sync: false
+      - key: JWT_SECRET
+        sync: false
+      - key: PYTHON_API_URL
+        value: https://intervueai-python-backend.onrender.com
+
+  # Python Backend
+  - type: web
+    name: intervueai-python-backend
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: python interview_api.py
+    envVars:
+      - key: PORT
+        value: 8000
